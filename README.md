@@ -40,7 +40,6 @@ conda run -n temp python make_traj.py
 ```
 
 https://github.com/user-attachments/assets/cattle_flow.mp4
-<video src=https://github.com/ialab-yale/flow_ergodic/blob/main/cattle_feeding/cattle_traj.mp4 width="320" height="240" controls></video>
 
 https://github.com/user-attachments/assets/cattle_traj.mp4
 
@@ -64,6 +63,9 @@ conda run -n temp python make_traj.py
 https://github.com/user-attachments/assets/vortex_flow.mp4
 
 https://github.com/user-attachments/assets/vortex_emmd.mp4
+
+[![Vortex flow demo](vortex_flow/thumbnail.png)](vortex_flow/vortex_flow.mp4)
+
 
 ---
 
