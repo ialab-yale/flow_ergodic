@@ -1,6 +1,6 @@
 # Asymptotically Optimal Ergodic Coverage on Generalized Motion Fields
 
-Code for the paper **"Asymptotically Optimal Ergodic Coverage on Generalized Motion Fields"**. We present a trajectory optimization framework for ergodic coverage over time-varying distributions defined by dynamic particle flows — cattle herds, ocean currents, vortex fields — using Maximum Mean Discrepancy (MMD) minimized via augmented Lagrangian methods with JAX-accelerated gradients.
+Code for the paper **"Asymptotically Optimal Ergodic Coverage on Generalized Motion Fields"**. We present a trajectory planner for ergodic coverage over time-varying distributions defined by dynamic particle flows (e.g., cattle herds, ocean currents, vortex fields) using Maximum Mean Discrepancy (MMD).
 
 ---
 
@@ -82,50 +82,6 @@ conda run -n temp python make_traj.py
 https://github.com/user-attachments/assets/whale_traj.mp4
 
 > Ocean current data (`whale_search/flow_data/flow_data.pkl`) must be present. The flow field is loaded from HYCOM Gulf of Mexico velocity snapshots.
-
----
-
-## Methods
-
-| File | Description |
-|------|-------------|
-| `methods/flow_emmd.py` | Core planner — MMD loss, augmented Lagrangian solver, 2D/3D dynamics |
-| `methods/augmented_lagrange_wrapper.py` | Augmented Lagrangian wrapper around `jaxopt.LBFGS` |
-
-**`Flow_EMMD`** takes a set of time-varying particle trajectories (the "information sources") and finds the agent path minimizing MMD between cumulative visitation and the empirical particle distribution. Constraints enforce dynamics and control limits.
-
-```python
-from methods.flow_emmd import Flow_EMMD
-
-args = {'T': 120, 'h': 0.1, 'dt': 0.25, 'power': 0.5, 'dim': 2}
-flow = Flow_EMMD(args, x_0=start_pos)
-flow.load_data(flow_args=...)
-flow.solve_flow()
-```
-
----
-
-## Project Structure
-
-```
-flow_ergodic/
-├── methods/
-│   ├── flow_emmd.py                  # Core planner
-│   └── augmented_lagrange_wrapper.py # Optimizer
-├── cattle_feeding/
-│   ├── cattle_flow.py                # Herd simulation + animation
-│   ├── make_traj.py                  # Ergodic planner for cattle
-│   └── cattle_data.npz               # Saved flow data
-├── vortex_flow/
-│   ├── flow_animate.py               # Vortex simulation + animation
-│   ├── make_traj.py                  # Ergodic planner for vortex
-│   └── flow_data/
-│       └── flow_data.npz             # Saved vortex data
-└── whale_search/
-    ├── make_traj.py                  # Ergodic planner for whale search
-    └── flow_data/
-        └── flow_data.pkl             # HYCOM Gulf of Mexico currents
-```
 
 ---
 
