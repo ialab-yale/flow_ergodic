@@ -81,6 +81,8 @@ conda run -n temp python make_traj.py
 
 https://github.com/user-attachments/assets/whale_traj.mp4
 
+![Whale search trajectory](whale_search/whale_traj.mp4)
+
 > Ocean current data (`whale_search/flow_data/flow_data.pkl`) must be present. The flow field is loaded from HYCOM Gulf of Mexico velocity snapshots.
 
 ---
