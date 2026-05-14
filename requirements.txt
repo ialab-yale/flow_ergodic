@@ -1,0 +1,14 @@
+numpy
+matplotlib
+scipy
+jax
+jaxlib
+jaxopt
+trimesh
+open3d
+cartopy
+cmocean
+cmcrameri
+imageio
+dill
+svgpath2mpl
