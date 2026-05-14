@@ -39,10 +39,6 @@ conda run -n temp python cattle_flow.py
 conda run -n temp python make_traj.py
 ```
 
-https://github.com/user-attachments/assets/cattle_flow.mp4
-
-https://github.com/user-attachments/assets/cattle_traj.mp4
-
 ---
 
 ### 2. Vortex Flow
@@ -60,12 +56,6 @@ conda run -n temp python flow_animate.py
 conda run -n temp python make_traj.py
 ```
 
-https://github.com/user-attachments/assets/vortex_flow.mp4
-
-https://github.com/user-attachments/assets/vortex_emmd.mp4
-
-[![Vortex flow demo](vortex_flow/thumbnail.png)](vortex_flow/vortex_flow.mp4)
-
 
 ---
 
@@ -78,12 +68,6 @@ Whale pods are advected through real HYCOM ocean current data. The agent plans a
 cd whale_search
 conda run -n temp python make_traj.py
 ```
-
-https://github.com/user-attachments/assets/whale_traj.mp4
-
-![Whale search trajectory](https://github.com/user-attachments/assets/301b94ae-e69a-41a0-b24c-1ffc3a26bcad)
-
-<video src="[path/to/video.mp4](https://github.com/user-attachments/assets/301b94ae-e69a-41a0-b24c-1ffc3a26bcad)" width="320" height="240" controls></video>
 
 > Ocean current data (`whale_search/flow_data/flow_data.pkl`) must be present. The flow field is loaded from HYCOM Gulf of Mexico velocity snapshots.
 
