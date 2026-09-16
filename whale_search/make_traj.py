@@ -109,11 +109,11 @@ def run_animation(traj, vert_traj, dt, lon, lat, u, v, pt_color, labels=None, fi
 if __name__ == '__main__':
     args = {
         'T': 120,
-        'h': 0.1,
+        'h': 0.06,
         'dt': 0.25,
         'max_dx': 5,
         'N_traj': 1,
-        'power': 0.75 * 0.58 * 24 / 60,
+        'power': 0.29 * 24 / 60,
         'dim': 2,
         'data_path': 'flow_data/flow_data.pkl',
         'extent': [-95, -91, 19, 23],

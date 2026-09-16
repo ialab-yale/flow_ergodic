@@ -161,7 +161,7 @@ if __name__ == "__main__":
 
     args = {
             'T': T, 
-            'h': 0.03, 
+            'h': 0.02, 
             'dt': dt, 
             'max_dx': 5,
             'N_traj': 1,

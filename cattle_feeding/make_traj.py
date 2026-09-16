@@ -85,12 +85,12 @@ if __name__ == '__main__':
 
     args = {
         'T': T,
-        'h': 0.11,
+        'h': 0.24,
         'dt': dt,
         'power': 0.25
     }
 
-    flow = Flow_EMMD(args, x_0=np.array([3.0, 3.0]))
+    flow = Flow_EMMD(args, x_0=np.array([4, 1]))
     flow.load_data(flow_args={'centers': centers})
     flow.solve_flow()
 

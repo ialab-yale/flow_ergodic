@@ -19,9 +19,9 @@ import pickle
 jax.config.update('jax_enable_x64', True)
 
 try:
-    from .augmented_lagrange_wrapper import AugmentedLagrangeWrapper
+    from .augmented_lagrangian_wrapper import AugmentedLagrangianSolver
 except:
-    from augmented_lagrange_wrapper import AugmentedLagrangeWrapper
+    from augmented_lagrangian_wrapper import AugmentedLagrangianSolver
 
 class Flow_EMMD:
     def __init__(self, input_args, x_0=None):
@@ -131,6 +131,11 @@ class Flow_EMMD:
         def kernel_at_t(x_t, centers_t_t):
             return jax.vmap(lambda c: self.RBF_kernel(x_t, c, self.h))(centers_t_t)
         return jax.vmap(kernel_at_t)(X, centers_t)
+
+    # def compute_kernels(self, X, centers_t):
+    #     def kernel_at_t(x_t, centers_t_t):
+    #         return jax.vmap(lambda c: self.unit_kernel(x_t, c))(centers_t_t)
+    #     return jax.vmap(kernel_at_t)(X, centers_t)
 
     def make_custom_info_map(self, centers, samples, bandwidth=0.005):
         grid = (jnp.linspace(jnp.min(centers[0, :, 0]), jnp.max(centers[0, :, 0]), 100),
@@ -281,6 +286,9 @@ class Flow_EMMD:
     def RBF_kernel(x, xp, h):
         return jnp.exp(-jnp.sum((x-xp)**2)/h)
 
+    # def unit_kernel(self, x, xp):
+    #     return jnp.sum((x-xp)) #  / jnp.linalg.norm(x-xp))
+
     def solve_flow(self):
         def _flow_tornado_step(v, dt):
             z_max = 0.01
@@ -354,13 +362,13 @@ class Flow_EMMD:
                 -params['U'] - args['power'],
             ])
 
-        solver = AugmentedLagrangeWrapper(jaxopt.LBFGS, params, loss, eq_constr, ineq_constr, args, c=self.solver_c, tol=1e-17)
-        solver.solve(max_iter=500, eps=1e-8)
+        solver = AugmentedLagrangianSolver(loss, eq_constr, ineq_constr)
+        solution, state = solver.run(params, args)
 
-        self.trajectory = solver.solution['X'][0]
-        self.power_use = np.array(solver.solution['U'])
+        self.trajectory = solution['X'][0]
+        self.power_use = np.array(solution['U'])
 
-        print(f"Max Eq Constraint: {jnp.max(jnp.abs(eq_constr(solver.solution, args)[:(len(self.trajectory)-1)]))}")
+        print(f"Max Eq Constraint: {jnp.max(jnp.abs(eq_constr(solution, args)[:(len(self.trajectory)-1)]))}")
         print(f"Flow Trajectory Shape: {self.trajectory.shape}")
         print(f"Max Power Use: {np.max(np.abs(self.power_use))}")
 
