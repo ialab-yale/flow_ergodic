@@ -19,9 +19,9 @@ import pickle
 jax.config.update('jax_enable_x64', True)
 
 try:
-    from .augmented_lagrangian_wrapper import AugmentedLagrangianSolver
+    from .admm_wrapper import ADMMSolver
 except:
-    from augmented_lagrangian_wrapper import AugmentedLagrangianSolver
+    from admm_wrapper import ADMMSolver
 
 class Flow_EMMD:
     def __init__(self, input_args, x_0=None):
@@ -362,7 +362,7 @@ class Flow_EMMD:
                 -params['U'] - args['power'],
             ])
 
-        solver = AugmentedLagrangianSolver(loss, eq_constr, ineq_constr)
+        solver = ADMMSolver(loss, eq_constr, ineq_constr)
         solution, state = solver.run(params, args)
 
         self.trajectory = solution['X'][0]

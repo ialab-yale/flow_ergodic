@@ -109,7 +109,7 @@ def run_animation(traj, vert_traj, dt, lon, lat, u, v, pt_color, labels=None, fi
 if __name__ == '__main__':
     args = {
         'T': 120,
-        'h': 0.06,
+        'h': 0.14,
         'dt': 0.25,
         'max_dx': 5,
         'N_traj': 1,

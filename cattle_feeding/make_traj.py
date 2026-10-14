@@ -87,7 +87,7 @@ if __name__ == '__main__':
         'T': T,
         'h': 0.24,
         'dt': dt,
-        'power': 0.25
+        'power': 0.2
     }
 
     flow = Flow_EMMD(args, x_0=np.array([4, 1]))
